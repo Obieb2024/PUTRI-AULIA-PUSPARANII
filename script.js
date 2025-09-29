@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
         'foto6.jpg', 'foto7.jpg', 'foto8.jpg', 'foto9.jpg', 'foto10.jpg'
     ];
 
-    // ... (kode variabel lainnya sama) ...
     const playButton = document.getElementById('play-button');
     const startScreen = document.getElementById('start-screen');
     const greetingSection = document.getElementById('greeting-section');
@@ -16,14 +15,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const sliderContainer = document.getElementById('gallery-slider-container');
     const galleryTrack = document.getElementById('gallery-track');
     const backgroundPhotosDivs = document.querySelectorAll('.background-photos');
+    const backToMenuButton = document.getElementById('back-to-menu-button');
     let slides = [];
     let currentSlideIndex = 0;
+    let galleryInterval;
 
     playButton.addEventListener('click', () => {
         startScreen.style.display = 'none';
         greetingSection.style.display = 'flex';
-        audio.play();
-        setInterval(createVisual, 500);
+        audio.play().catch(e => console.log("Audio play failed"));
+        
+        // Hapus interval lama jika ada, lalu set yang baru
+        if (window.createVisualInterval) clearInterval(window.createVisualInterval);
+        window.createVisualInterval = setInterval(createVisual, 800); // Buat hati lebih jarang
+        
         setupBackgroundPhotos();
         setTimeout(() => {
             galleryBtnContainer.style.display = 'block';
@@ -32,10 +37,17 @@ document.addEventListener('DOMContentLoaded', () => {
     
     showGalleryButton.addEventListener('click', startGallery);
 
+    backToMenuButton.addEventListener('click', () => {
+        clearInterval(galleryInterval);
+        sliderContainer.style.display = 'none';
+        greetingSection.style.display = 'flex';
+        currentSlideIndex = 0;
+    });
+
     function setupBackgroundPhotos() {
         const allBgPhotos = Array(10).fill([...photoFiles]).flat();
         backgroundPhotosDivs.forEach(div => {
-            if(div.innerHTML !== "") return;
+            if(div.hasChildNodes()) return;
             allBgPhotos.forEach(fileName => {
                 const img = document.createElement('img');
                 img.src = fileName;
@@ -45,7 +57,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Fungsi untuk memulai galeri foto besar
     function startGallery() {
         greetingSection.style.display = 'none';
         sliderContainer.style.display = 'block';
@@ -58,10 +69,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 img.classList.add('gallery-photo');
                 slide.appendChild(img);
 
-                // --- BUAT ELEMEN UNTUK EFEK LOVE BURST ---
                 const loveOverlay = document.createElement('div');
-                loveOverlay.classList.add('love-burst-overlay');
-                for (let i = 0; i < 4; i++) { // Buat 4 hati
+                loveOverlay.classList.add('love-burst-container');
+                for (let i = 0; i < 5; i++) {
                     const heart = document.createElement('div');
                     heart.classList.add('burst-heart');
                     heart.innerHTML = '💖';
@@ -79,27 +89,29 @@ document.addEventListener('DOMContentLoaded', () => {
                 slides.push(slide);
             });
         }
+        
         showSlide(currentSlideIndex);
-        setInterval(() => {
+        
+        clearInterval(galleryInterval);
+        galleryInterval = setInterval(() => {
             currentSlideIndex = (currentSlideIndex + 1) % slides.length;
             showSlide(currentSlideIndex);
         }, 5500);
     }
 
-    // Fungsi untuk menampilkan slide besar
     function showSlide(index) {
         slides.forEach(slide => slide.classList.remove('active', 'previous'));
+        
         const activeSlide = slides[index];
         const prevIndex = (index === 0) ? slides.length - 1 : index - 1;
+        
         slides[prevIndex].classList.add('previous');
         activeSlide.classList.add('active');
 
-        // --- PICU ANIMASI LOVE BURST ---
-        const loveOverlay = activeSlide.querySelector('.love-burst-overlay');
+        const loveOverlay = activeSlide.querySelector('.love-burst-container');
         if (loveOverlay) {
-            loveOverlay.classList.remove('animate'); // Reset
-            // Paksa reflow agar animasi bisa diputar ulang
-            void loveOverlay.offsetWidth; 
+            loveOverlay.classList.remove('animate');
+            void loveOverlay.offsetWidth;
             loveOverlay.classList.add('animate');
         }
 
@@ -113,14 +125,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Fungsi untuk membuat hati bergerak
     function createVisual() {
+        if(document.querySelector('.slider-container').style.display === 'block') return; // Hentikan jika galeri aktif
         const heart = document.createElement('div');
         heart.classList.add('heart');
         heart.innerText = '💖';
         heart.style.left = Math.random() * 100 + 'vw';
-        heart.style.animationDuration = Math.random() * 3 + 7 + 's';
+        heart.style.animationDuration = (Math.random() * 5 + 7) + 's';
         visualWrapper.appendChild(heart);
-        setTimeout(() => { heart.remove(); }, 10000);
+        setTimeout(() => { heart.remove(); }, 12000);
     }
 });
