@@ -1,3 +1,4 @@
+
 /* --- Pengaturan Dasar & Tombol --- */
 html, body { 
     margin: 0; 
@@ -161,7 +162,7 @@ html, body {
     height: 100vh; 
     overflow: hidden; 
     z-index: 10;
-    background-color: #ffdde1;
+    background-color: #ffdde1; /* Latar belakang pink untuk slider */
 }
 
 .slider-track { 
@@ -186,13 +187,12 @@ html, body {
     padding: 20px; 
     box-sizing: border-box; 
     opacity: 0;
-    transform: scale(1.1);
-    transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
+    transition: opacity 1.5s ease-in-out; /* Transisi untuk opacity */
+    /* Menghilangkan transform dari sini, akan diterapkan pada foto secara terpisah */
 }
 
 .slide.active { 
     opacity: 1; 
-    transform: scale(1); 
     z-index: 1; 
 }
 
@@ -203,7 +203,56 @@ html, body {
     box-shadow: 0 10px 30px rgba(0,0,0,0.2); 
     z-index: 2; 
     position: relative;
+    object-fit: contain; /* Pastikan foto terlihat penuh */
+
+    /* EFEK LOVE TRANSISI */
+    /* Default clip-path (bentuk persegi) */
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); 
+    transition: clip-path 1s ease-in-out, transform 1s ease-in-out; 
 }
+
+/* Efek love saat slide muncul */
+.slide.active .gallery-photo {
+    /* Bentuk hati dengan clip-path, ukuran disesuaikan */
+    clip-path: path("M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2 c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z");
+    transform: scale(1.0); /* Kembali ke ukuran normal */
+}
+
+/* Animasi untuk nailong (kilau diagonal) */
+.gallery-photo::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0) 40%,
+        rgba(255, 255, 255, 0.6) 50%,
+        rgba(255, 255, 255, 0) 60%
+    );
+    opacity: 0;
+    transform: translateX(-100%);
+    animation: shine 3s infinite 2s ease-out; /* 2s delay agar tidak langsung muncul */
+    animation-play-state: paused; /* Awalnya berhenti */
+    pointer-events: none;
+    z-index: 3; /* Pastikan di atas foto tapi di bawah teks */
+    border-radius: 15px; /* Ikuti border-radius foto */
+}
+
+.slide.active .gallery-photo::after {
+    animation-play-state: running; /* Jalankan saat slide aktif */
+    opacity: 1;
+}
+
+@keyframes shine {
+    0% { transform: translateX(-100%); opacity: 0; }
+    20% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { transform: translateX(100%); opacity: 0; }
+}
+
 
 /* Posisi setiap baris foto di sesi galeri besar */
 #gallery-slider-container .background-photos-container:nth-of-type(1) { top: -20%; left: -50%; animation-delay: -5s; }
@@ -213,7 +262,6 @@ html, body {
 #gallery-slider-container .background-photos-container:nth-of-type(5) { top: 40%; left: 50%; animation-delay: -40s; }
 #gallery-slider-container .background-photos-container:nth-of-type(6) { top: 90%; left: 30%; animation-delay: -70s; }
 
-/* --- Teks di Foto Pertama --- */
 /* --- Teks di Foto Pertama --- */
 .photo-caption {
     position: absolute;
@@ -230,9 +278,8 @@ html, body {
     max-width: 80%;
     opacity: 0;
     animation-fill-mode: forwards;
-    z-index: 5; /* <-- TAMBAHKAN BARIS INI */
+    z-index: 5; /* Pastikan teks di depan foto */
 }
-
 
 @keyframes fadeInUp {
     to {
