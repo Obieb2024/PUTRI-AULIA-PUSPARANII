@@ -1,150 +1,26 @@
+/* --- Pengaturan Dasar & Tombol (Sama) --- */
+html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; font-family: 'Handlee', cursive; background-color: #FFC0CB; }
+.visual-wrapper { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+.fullscreen-section { width: 100vw; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; position: fixed; top: 0; left: 0; }
+#start-screen { z-index: 30; background-color: #FFC0CB; }
+#greeting-section { display: none; z-index: 25; }
+#play-button { padding: 20px 40px; font-size: 1.5em; font-family: 'Pacifico', cursive; color: white; background-color: #ff69b4; border: none; border-radius: 50px; cursor: pointer; }
+.heart { position: absolute; font-size: 2em; opacity: 0; animation: floatUp 10s infinite linear; }
+@keyframes floatUp { 0% { transform: translateY(100vh) scale(0.5); opacity: 0; } 50% { opacity: 1; } 100% { transform: translateY(-10vh) scale(1.2); opacity: 0; } }
 
-/* --- Pengaturan Dasar & Tombol --- */
-html, body { 
-    margin: 0; 
-    padding: 0; 
-    width: 100%; 
-    height: 100%; 
-    overflow: hidden; 
-    font-family: 'Handlee', cursive; 
-    background-color: #FFC0CB; 
-}
+/* --- Sesi Ucapan (Sama) --- */
+#greeting-section { background-color: #FFC0CB; overflow: hidden; }
+.container { background-color: rgba(255, 255, 255, 0.9); padding: 25px; border-radius: 20px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); width: 85%; max-width: 400px; text-align: center; z-index: 2; }
+.profile-photo { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin-bottom: 15px; border: 5px solid #FF69B4; }
+.greeting { font-family: 'Pacifico', cursive; color: #E75480; font-size: 1.8em; line-height: 1.4; margin: 0; }
+#gallery-button-container { margin-top: 20px; }
+#show-gallery-button { padding: 12px 25px; font-size: 1em; font-family: 'Pacifico', cursive; color: #E75480; background-color: white; border: 2px solid #ffb6c1; border-radius: 50px; cursor: pointer; transition: all 0.3s ease; }
 
-.visual-wrapper { 
-    position: fixed; 
-    top: 0; 
-    left: 0; 
-    width: 100%; 
-    height: 100%; 
-    pointer-events: none; 
-    z-index: 0; 
-}
-
-.fullscreen-section { 
-    width: 100vw; 
-    height: 100vh; 
-    display: flex; 
-    flex-direction: column; 
-    justify-content: center; 
-    align-items: center; 
-    position: fixed; 
-    top: 0; 
-    left: 0; 
-}
-
-#start-screen { 
-    z-index: 30; 
-    background-color: #FFC0CB; 
-}
-
-#greeting-section { 
-    display: none; 
-    z-index: 25; 
-}
-
-#play-button { 
-    padding: 20px 40px; 
-    font-size: 1.5em; 
-    font-family: 'Pacifico', cursive; 
-    color: white; 
-    background-color: #ff69b4; 
-    border: none; 
-    border-radius: 50px; 
-    cursor: pointer; 
-}
-
-.heart { 
-    position: absolute; 
-    font-size: 2em; 
-    opacity: 0; 
-    animation: floatUp 10s infinite linear; 
-}
-
-@keyframes floatUp { 
-    0% { transform: translateY(100vh) scale(0.5); opacity: 0; } 
-    50% { opacity: 1; } 
-    100% { transform: translateY(-10vh) scale(1.2); opacity: 0; } 
-}
-
-/* --- Sesi Ucapan --- */
-#greeting-section { 
-    background-color: #FFC0CB; 
-    overflow: hidden; 
-}
-
-.container { 
-    background-color: rgba(255, 255, 255, 0.9); 
-    padding: 25px; 
-    border-radius: 20px; 
-    box-shadow: 0 8px 16px rgba(0,0,0,0.2); 
-    width: 85%; 
-    max-width: 400px; 
-    text-align: center; 
-    z-index: 2; 
-}
-
-.profile-photo { 
-    width: 120px; 
-    height: 120px; 
-    border-radius: 50%; 
-    object-fit: cover; 
-    margin-bottom: 15px; 
-    border: 5px solid #FF69B4; 
-}
-
-.greeting { 
-    font-family: 'Pacifico', cursive; 
-    color: #E75480; 
-    font-size: 1.8em; 
-    line-height: 1.4; 
-    margin: 0; 
-}
-
-#gallery-button-container { 
-    margin-top: 20px; 
-}
-
-#show-gallery-button { 
-    padding: 12px 25px; 
-    font-size: 1em; 
-    font-family: 'Pacifico', cursive; 
-    color: #E75480; 
-    background-color: white; 
-    border: 2px solid #ffb6c1; 
-    border-radius: 50px; 
-    cursor: pointer; 
-    transition: all 0.3s ease; 
-}
-
-/* --- Latar Belakang Foto Bergulir --- */
-.background-photos-container {
-    position: absolute; 
-    width: 150%; 
-    z-index: 1;
-    opacity: 0.25; 
-    pointer-events: none;
-    transform: rotate(-20deg) scale(1.3);
-}
-
-.background-photos { 
-    display: flex; 
-    gap: 15px; 
-    animation: scroll-bg 80s linear infinite; 
-}
-
-.bg-photo { 
-    height: 80px; 
-    width: auto; 
-    border-radius: 10px; 
-    flex-shrink: 0; 
-}
-
-@keyframes scroll-bg { 
-    0% { transform: translateX(0); } 
-    100% { transform: translateX(-50%); } 
-}
-
-/* Posisi setiap baris foto di sesi ucapan */
+/* --- Latar Belakang Foto Bergulir (Sama) --- */
+.background-photos-container { position: absolute; width: 150%; z-index: 1; opacity: 0.25; pointer-events: none; transform: rotate(-20deg) scale(1.3); }
+.background-photos { display: flex; gap: 15px; animation: scroll-bg 80s linear infinite; }
+.bg-photo { height: 80px; width: auto; border-radius: 10px; flex-shrink: 0; }
+@keyframes scroll-bg { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 #greeting-section .background-photos-container:nth-child(1) { top: -20%; left: -50%; animation-delay: 0s; }
 #greeting-section .background-photos-container:nth-child(2) { top: 30%; left: -60%; animation-delay: -30s; }
 #greeting-section .background-photos-container:nth-child(3) { top: 80%; left: -40%; animation-delay: -60s; }
@@ -152,154 +28,43 @@ html, body {
 #greeting-section .background-photos-container:nth-child(5) { top: 40%; left: 50%; animation-delay: -45s; }
 #greeting-section .background-photos-container:nth-child(6) { top: 90%; left: 30%; animation-delay: -70s; }
 
-/* --- CSS SLIDER FOTO BESAR --- */
-.slider-container {
-    display: none; 
-    position: fixed; 
-    top: 0; 
-    left: 0;
-    width: 100vw; 
-    height: 100vh; 
-    overflow: hidden; 
-    z-index: 10;
-    background-color: #ffdde1; /* Latar belakang pink untuk slider */
+/* --- CSS SLIDER FOTO BESAR DENGAN EFEK BARU --- */
+.slider-container { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; overflow: hidden; z-index: 10; background-color: #ffdde1; }
+.slider-track { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 3; }
+.slide { position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; background-color: transparent; display: flex; justify-content: center; align-items: center; padding: 20px; box-sizing: border-box; opacity: 0; transform: scale(1.2); /* Mulai dari besar */ transition: opacity 1.5s ease, transform 1.5s ease; }
+.slide.active { opacity: 1; transform: scale(1); /* Kembali ke normal saat aktif */ z-index: 2; }
+.slide.previous { z-index: 1; } /* Pastikan slide sebelumnya di belakang */
+.gallery-photo { max-width: 100%; max-height: 100%; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); z-index: 2; position: relative; }
+.photo-caption { /* ... Sama seperti sebelumnya ... */ z-index: 5; }
+
+/* --- EFEK KILAU NAILONG (Sama) --- */
+.gallery-photo::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient( 45deg, rgba(255, 255, 255, 0) 40%, rgba(255, 255, 255, 0.6) 50%, rgba(255, 255, 255, 0) 60% ); opacity: 0; transform: translateX(-100%); animation: shine 3s infinite 2s ease-out; animation-play-state: paused; pointer-events: none; z-index: 3; border-radius: 15px; }
+.slide.active .gallery-photo::after { animation-play-state: running; opacity: 1; }
+@keyframes shine { 0% { transform: translateX(-100%); opacity: 0; } 20% { opacity: 1; } 80% { opacity: 1; } 100% { transform: translateX(100%); opacity: 0; } }
+
+/* --- EFEK BARU: LOVE BURST TRANSITION --- */
+.love-burst-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 4; pointer-events: none; opacity: 0; }
+.love-burst-overlay.animate { opacity: 1; }
+.love-burst-overlay .burst-heart { position: absolute; font-size: 3em; color: #ff69b4; animation: love-burst 1.2s ease-out forwards; }
+@keyframes love-burst {
+    0% { transform: scale(0); opacity: 1; }
+    100% { transform: scale(3) rotate(360deg); opacity: 0; }
 }
+/* Atur posisi dan delay setiap hati */
+.love-burst-overlay .burst-heart:nth-child(1) { transform-origin: 0 0; animation-delay: 0s; }
+.love-burst-overlay .burst-heart:nth-child(2) { transform-origin: 100% 0; animation-delay: 0.1s; }
+.love-burst-overlay .burst-heart:nth-child(3) { transform-origin: 0 100%; animation-delay: 0.2s; }
+.love-burst-overlay .burst-heart:nth-child(4) { transform-origin: 100% 100%; animation-delay: 0.3s; }
 
-.slider-track { 
-    position: absolute; 
-    top: 0; 
-    left: 0; 
-    width: 100%; 
-    height: 100%; 
-    z-index: 3; 
-}
-
-.slide {
-    position: absolute; 
-    top: 0; 
-    left: 0; 
-    width: 100vw; 
-    height: 100vh;
-    background-color: transparent; 
-    display: flex; 
-    justify-content: center; 
-    align-items: center;
-    padding: 20px; 
-    box-sizing: border-box; 
-    opacity: 0;
-    transition: opacity 1.5s ease-in-out; /* Transisi untuk opacity */
-    /* Menghilangkan transform dari sini, akan diterapkan pada foto secara terpisah */
-}
-
-.slide.active { 
-    opacity: 1; 
-    z-index: 1; 
-}
-
-.gallery-photo {
-    max-width: 100%; 
-    max-height: 100%; 
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2); 
-    z-index: 2; 
-    position: relative;
-    object-fit: contain; /* Pastikan foto terlihat penuh */
-
-    /* EFEK LOVE TRANSISI */
-    /* Default clip-path (bentuk persegi) */
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); 
-    transition: clip-path 1s ease-in-out, transform 1s ease-in-out; 
-}
-
-/* Efek love saat slide muncul */
-.slide.active .gallery-photo {
-    /* Bentuk hati dengan clip-path, ukuran disesuaikan */
-    clip-path: path("M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2 c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z");
-    transform: scale(1.0); /* Kembali ke ukuran normal */
-}
-
-/* Animasi untuk nailong (kilau diagonal) */
-.gallery-photo::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-        45deg,
-        rgba(255, 255, 255, 0) 40%,
-        rgba(255, 255, 255, 0.6) 50%,
-        rgba(255, 255, 255, 0) 60%
-    );
-    opacity: 0;
-    transform: translateX(-100%);
-    animation: shine 3s infinite 2s ease-out; /* 2s delay agar tidak langsung muncul */
-    animation-play-state: paused; /* Awalnya berhenti */
-    pointer-events: none;
-    z-index: 3; /* Pastikan di atas foto tapi di bawah teks */
-    border-radius: 15px; /* Ikuti border-radius foto */
-}
-
-.slide.active .gallery-photo::after {
-    animation-play-state: running; /* Jalankan saat slide aktif */
-    opacity: 1;
-}
-
-@keyframes shine {
-    0% { transform: translateX(-100%); opacity: 0; }
-    20% { opacity: 1; }
-    80% { opacity: 1; }
-    100% { transform: translateX(100%); opacity: 0; }
-}
-
-
-/* Posisi setiap baris foto di sesi galeri besar */
+/* ... Sisa CSS (background & photo caption) tetap sama ... */
 #gallery-slider-container .background-photos-container:nth-of-type(1) { top: -20%; left: -50%; animation-delay: -5s; }
 #gallery-slider-container .background-photos-container:nth-of-type(2) { top: 30%; left: -60%; animation-delay: -25s; }
 #gallery-slider-container .background-photos-container:nth-of-type(3) { top: 80%; left: -40%; animation-delay: -55s; }
 #gallery-slider-container .background-photos-container:nth-of-type(4) { top: -10%; left: 40%; animation-delay: -10s; }
 #gallery-slider-container .background-photos-container:nth-of-type(5) { top: 40%; left: 50%; animation-delay: -40s; }
 #gallery-slider-container .background-photos-container:nth-of-type(6) { top: 90%; left: 30%; animation-delay: -70s; }
-
-/* --- Teks di Foto Pertama --- */
-.photo-caption {
-    position: absolute;
-    bottom: 10%;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    padding: 10px 20px;
-    border-radius: 20px;
-    font-size: 1.2em;
-    font-family: 'Handlee', cursive;
-    text-align: center;
-    max-width: 80%;
-    opacity: 0;
-    animation-fill-mode: forwards;
-    z-index: 5; /* Pastikan teks di depan foto */
-}
-
-@keyframes fadeInUp {
-    to {
-        opacity: 1;
-        transform: translate(-50%, -10px);
-    }
-}
-
-.fade-in-up {
-    animation-name: fadeInUp;
-    animation-duration: 1s;
-}
-
-@keyframes fadeOut {
-    to {
-        opacity: 0;
-    }
-}
-
-.fade-out {
-    animation-name: fadeOut;
-    animation-duration: 1s;
-}
+.photo-caption { position: absolute; bottom: 10%; left: 50%; transform: translateX(-50%); background-color: rgba(0, 0, 0, 0.5); color: white; padding: 10px 20px; border-radius: 20px; font-size: 1.2em; font-family: 'Handlee', cursive; text-align: center; max-width: 80%; opacity: 0; animation-fill-mode: forwards; z-index: 5; }
+@keyframes fadeInUp { to { opacity: 1; transform: translate(-50%, -10px); } }
+.fade-in-up { animation-name: fadeInUp; animation-duration: 1s; }
+@keyframes fadeOut { to { opacity: 0; } }
+.fade-out { animation-name: fadeOut; animation-duration: 1s; }
