@@ -24,7 +24,7 @@ html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden;
 
 
 /* --- Hati Terbang Latar (Bukan Love Burst) --- */
-.heart { position: absolute; font-size: 2em; opacity: 0; animation: floatUp 12s infinite linear; }
+.heart { position: absolute; font-size: 2em; opacity: 0; animation: floatUp 12s infinite linear; z-index: 6; }
 @keyframes floatUp { 0% { transform: translateY(100vh) scale(0.5); opacity: 0; } 20% { opacity: 0.8; } 90% { opacity: 0.8; } 100% { transform: translateY(-10vh) scale(1.2); opacity: 0; } }
 
 /* --- Sesi Ucapan --- */
